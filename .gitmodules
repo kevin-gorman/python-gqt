@@ -1,0 +1,6 @@
+[submodule "lib/gqt"]
+	path = lib/gqt
+	url = https://github.com/ryanlayer/gqt
+[submodule "lib/htslib"]
+	path = lib/htslib
+	url = https://github.com/samtools/htslib
