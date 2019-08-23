@@ -68,11 +68,11 @@ if not os.path.exists("lib/gqt/src/query.h"):
     
 if not os.path.exists("lib/sqlite-amalgamation-3080701"):
     import subprocess as sp
-    sp.check_call("wget sqlite-amalgamation-3080701 && unzip sqlite-amalgamation-3080701 && rm -rf sqlite-amalgamation-3080701.zip", shell=True)
-    
+    sp.check_call("cd lib && wget http://www.sqlite.org/2014/sqlite-amalgamation-3080701.zip && unzip sqlite-amalgamation-3080701 && rm -rf sqlite-amalgamation-3080701.zip", shell=True)
+
 if not os.path.exists("lib/gqt/bin/gqt"):
     import subprocess as sp
-    sp.check_call("make -C lib/gqt", shell=True)
+    sp.check_call("sed -i 's/-lm/-lm -lcurl -lcrypto/g' lib/gqt/src/Makefile && make -C lib/gqt", shell=True)
     
 from Cython.Distutils import build_ext
 
