@@ -72,6 +72,8 @@ if not os.path.exists("lib/sqlite-amalgamation-3080701"):
 
 if not os.path.exists("lib/gqt/bin/gqt"):
     import subprocess as sp
+    if not (sp.check_output(["flex", "-V"])[:4] == 'flex') or not (sp.check_output(["lex", "-V"])[:3] == 'lex'):
+        sp.check_call("wget http://downloads.sourceforge.net/project/flex/flex-2.5.39.tar.bz2 && bunzip2 flex-2.5.39.tar.bz2 && tar xvf flex-2.5.39.tar && cd flex-2.5.39 && ./configure && make && make install", shell=True) 
     sp.check_call("sed -i 's/-lm/-lm -lcurl -lcrypto/g' lib/gqt/src/Makefile && make -C lib/gqt", shell=True)
     
 from Cython.Distutils import build_ext
