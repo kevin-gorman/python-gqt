@@ -5,16 +5,10 @@
 from __future__ import print_function
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
 from libc.stdlib cimport free, malloc
-#from libc.stdio cimport FILE, ifstream
-import ctypes
 import sys
-import locale
-import array
 import cython
-import boto3
 cimport gqt
-#import s3fs
-#fs = s3fs.S3FileSystem(anon=False)
+
 
 
 
@@ -66,33 +60,3 @@ cpdef cy_query(char* i = '', char* d = '', char* c = '', char* v = '', char* t =
     '''
     return query(argc, argv, full_cmd)
     #return 0
-''' 
-s3_client = boto3.client('s3')
-s3_resource = boto3.resource('s3')
-
-cpdef cy_fopen(char* filename,char* type):
-    cdef FILE* cdata
-    commands = ["wb", "rb"]
-    if type == commands[1]:
-        bucket = 'gqt-files'
-        return fs.open(bucket + '/' + filename)
-        #return cdata
-        try:
-            cdata = s3_client.get_object(Bucket=bucket, Key=key1)['Body']
-        except Exception as e:
-            return str(e) + '       Error getting object ' + key1 + 'from bucket ' + bucket + '. Make sure they exist.'
-        #cdata = data
-        return <object> cdata
-
-cdef FILE* cy_file(char* filename,char* type):
-    cdef ifstream* ifsP = dynamic_cast<cdef ifstream* ifsP>(cy_fopen(filename,type))
-#cdef FILE result = cy_fopen('chr11.11q14.3.bcf', 'wb')
-'''
-'''
-cpdef int cy_query(int ac, char* argv[], char* full_cmd):
-    #cdef int q = query.query(ac, **av, *full_cmd);
-    #return q
-    #argv = <char**> &av
-    #cull_cmd = <char*> &fc
-    return query(ac, av, full_cmd)
-'''
