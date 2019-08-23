@@ -5,3 +5,6 @@ setup-requires
 build/
 *.so
 dist/
+lambda_function.py
+packaged.yaml
+template.yaml
