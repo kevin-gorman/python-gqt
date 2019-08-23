@@ -38,7 +38,7 @@ def install_requirements(specifiers):
             "-t", "setup-requires"] + to_install
         subprocess.call(cmd)
 
-requires = ['cython', 'awscli']
+requires = ['cython']
 install_requirements(missing_requirements(requires))
 
 excludes = ['irods', 'plugin']
