@@ -58,5 +58,9 @@ cpdef cy_query(char* i = '', char* d = '', char* c = '', char* v = '', char* t =
         print(argv[int(k)])
     print(full_cmd)
     '''
-    return query(argc, argv, full_cmd)
+    cdef int response = query(argc, argv, full_cmd)
+    for el in argv:
+        PyMem_Free(el)
+    PyMem_Free(argv)
+    return response
     #return 0
